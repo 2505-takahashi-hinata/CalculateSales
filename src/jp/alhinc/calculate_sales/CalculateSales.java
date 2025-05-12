@@ -67,9 +67,15 @@ public class CalculateSales {
 			String line;
 			// 一行ずつ読み込む
 			while((line = br.readLine()) != null) {
-				// ※ここの読み込み処理を変更してください。(処理内容1-2)
-				System.out.println(line);
+//				// ※ここの読み込み処理を変更してください。(処理内容1-2)
+//				System.out.println(line);
+//			}
+				String[] items = line.split(",");
 			}
+
+
+
+
 
 		} catch(IOException e) {
 			System.out.println(UNKNOWN_ERROR);
