@@ -45,7 +45,7 @@ public class CalculateSales {
 		File[] files = new File("C:\\Users\\trainee1214\\workspace\\売上集計課題").listFiles();
 		// 売上ファイルのみ保持するリストrcdFilesを作成
 		List<File> rcdFiles = new ArrayList<>();
-		// 配列filesに入っているファイルの数だけ繰り返す。ファイル名がマッチした売上ファイルをリストrcdFilesに格納
+		// 配列filesに入っているファイルの数だけ繰り返す  ファイル名がマッチした売上ファイルをリストrcdFilesに格納
 		for(int i = 0; i < files.length ; i++) {
 			if(files[i].getName().matches("^[0-9]{8}[.]rcd$")) {
 				rcdFiles.add(files[i]);
@@ -53,37 +53,30 @@ public class CalculateSales {
 		}
 
 		// ここから2-2
-		// 新たにリストを作成。売上ファイル内のコードと金額を入れていくため
-		List<String> rcdValue = new ArrayList<>();
 		// 売上ファイルの数だけ繰り返す
 		for(int i = 0; i < rcdFiles.size(); i++) {
+			List<String> rcdValue = new ArrayList<>();
 			BufferedReader br = null;
 
 			try {
 				// rcdFiles内、i番目のファイルを開く
 //				File file = new File("C:\\Users\\trainee1214\\workspace\\売上集計課題",rcdFiles.get(i).getName());
 				File file = rcdFiles.get(i);
-
 				// ファイルの情報をfr,brに渡していく
 				FileReader fr = new FileReader(file);
 				br = new BufferedReader(fr);
-
 				String line;
 				// 一行ずつ読み込む
 				while((line = br.readLine()) != null) {
-
 					rcdValue.add(line);
 				}
 
-				// 型変換。売上金額（rcdValueの2行目の要素）をString型→Long型に変換。変数
+				// 型変換。売上金額（rcdValueの2行目の要素）をString型→Long型に変換。
 				long fileSale = Long.parseLong(rcdValue.get(1));
-
 				//マップ：branchSalesから売上⾦額を取得し、型変換した金額を加算。変数saleAmountに代入
 				Long saleAmount = branchSales.get(rcdValue.get(0)) + fileSale;
-
 				//加算した売上金額をbranchSalesに追加。
 				branchSales.put(rcdValue.get(0), saleAmount);
-
 
 			} catch(IOException e) {
 				System.out.println(UNKNOWN_ERROR);
@@ -136,13 +129,10 @@ public class CalculateSales {
 
 //				// ※ここの読み込み処理を変更してください。(処理内容1-2)
 				// 支店定義ファイル読み込み、コードと店名をMapに追加
-//				System.out.println(line);
-//			}
 				String[] items = line.split(",");
 				branchNames.put(items[0], items[1]);
 				branchSales.put(items[0], 0L);
 			}
-
 
 		} catch(IOException e) {
 			System.out.println(UNKNOWN_ERROR);
@@ -183,7 +173,7 @@ public class CalculateSales {
 			// keyの数だけ繰り返す
 			for (String key : branchNames.keySet()) {
 				// Mapからvalueの値を取得
-				// writeメソッドでファイルに書き込み(支店コード、支店名、合計金額 　改行bw.newLine();）
+				// writeメソッドでファイルに書き込み(支店コード、支店名、合計金額  その後改行bw.newLine();）
 				bw.write(key + "," + branchNames.get(key) + "," + branchSales.get(key));
 				bw.newLine();
 			}
