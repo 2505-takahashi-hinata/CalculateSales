@@ -42,7 +42,7 @@ public class CalculateSales {
 
 		// ※ここから集計処理を作成してください。(処理内容2-1、2-2)
 		// 配列filesに、下記パスのファイルをすべて格納
-		File[] files = new File("C:\\Users\\trainee1214\\workspace\\売上集計課題").listFiles();
+		File[] files = new File(args[0]).listFiles();
 		// 売上ファイルのみ保持するリストrcdFilesを作成
 		List<File> rcdFiles = new ArrayList<>();
 		// 配列filesに入っているファイルの数だけ繰り返す  ファイル名がマッチした売上ファイルをリストrcdFilesに格納
